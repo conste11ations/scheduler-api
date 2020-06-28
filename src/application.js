@@ -40,6 +40,16 @@ module.exports = function application(
   app.use("/api", days(db));
   app.use("/api", appointments(db, actions.updateAppointment));
   app.use("/api", interviewers(db));
+  app.get("/", (req, res) =>
+  res.send(
+    `<ul>
+      <li><a href="/api/days">days</a></li>
+      <li><a href="/api/appointments">appointments</a></li>
+      <li><a href="/api/interviewers">interviewers</a></li>
+     </ul>
+    `
+  )
+);
 
   if (ENV === "development" || ENV === "test") {
     Promise.all([
